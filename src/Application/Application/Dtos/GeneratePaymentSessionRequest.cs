@@ -7,7 +7,7 @@ namespace Application.Dtos
     public class GeneratePaymentSessionRequest
     {
         public string ProcessingChannelId { get; }
-        public Money Money { get; }
+        public Models.Money Money  { get; }
         public BillingDetails BillingDetails { get; }
         public string SuccessUrl { get; }
         public string FailureUrl { get; }
@@ -36,7 +36,7 @@ namespace Application.Dtos
         public GeneratePaymentSessionRequest(
             string processingChannelId,
             BillingDetails billingDetails,
-            Money money,
+            Models.Money money,
             string successUrl,
             string failureUrl,
             string reference,

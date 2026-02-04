@@ -9,9 +9,9 @@ namespace Application.Exceptions
         public string Content { get; }
         public HttpStatusCode? HttpStatusCode { get; }
 
-        public PaymentProviderException(string errorContent, HttpStatusCode? statusCode, string content, HttpStatusCode? httpStatusCode) : base(errorContent)
+        public PaymentProviderException(string errorContent, HttpStatusCode? httpStatusCode) : base(errorContent)
         {
-            Content = content;
+            Content = errorContent;
             HttpStatusCode = httpStatusCode;
         }
     }
