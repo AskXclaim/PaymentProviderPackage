@@ -10,7 +10,8 @@ public static class DependenciesConfig
         builder.Services.AddOpenApiServices();
         builder.Services.AddEndpointServices();
 
-        builder.Services.AddScoped<IPaymentGateway, CheckoutComPaymentGateway>();
+        builder.Services.AddScoped<IPaymentGateway>(pg =>
+            new CheckoutComPaymentGateway(builder.Configuration.GetSection("secretKey").Value));
         builder.Services.AddExceptionServices();
     }
 }

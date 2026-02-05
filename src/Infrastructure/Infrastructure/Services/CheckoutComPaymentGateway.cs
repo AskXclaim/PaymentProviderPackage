@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Application.Dtos;
 using Application.Interfaces;
-using Checkout;
 using Infrastructure.Services.Builders;
 using Infrastructure.Services.Factories;
 using Infrastructure.Services.Factories.Interfaces;
@@ -10,13 +9,13 @@ namespace Infrastructure.Services
 {
     public class CheckoutComPaymentGateway : IPaymentGateway
     {
-        private readonly ICheckoutApi _apiBuild =
-            new CheckoutApiBuilder("").GetApiBuild();
-
         private readonly IFactory _paymentFactory;
 
-        public CheckoutComPaymentGateway() =>
-            _paymentFactory = new CheckoutPaymentMethodFactory(_apiBuild);
+        public CheckoutComPaymentGateway(string secretKey)
+        {
+            var apiBuild = new CheckoutApiBuilder(secretKey).GetApiBuild();
+            _paymentFactory = new CheckoutPaymentMethodFactory(apiBuild);
+        }
 
         public async Task<GeneratedPaymentSessionResponse> GeneratePaymentSession(GeneratePaymentSessionRequest request) =>
             await _paymentFactory.GetResult(request) as GeneratedPaymentSessionResponse;
