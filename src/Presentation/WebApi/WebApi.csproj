@@ -22,4 +22,10 @@
       <ProjectReference Include="..\..\Infrastructure\Infrastructure\Infrastructure.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Reference Include="Infrastructure">
+        <HintPath>..\..\Infrastructure\Infrastructure\bin\Debug\netstandard2.0\Infrastructure.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
 </Project>

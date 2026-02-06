@@ -2,14 +2,33 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
+        <PackageId>Payment-Provider-Package.Infrastructure</PackageId>
+        <Title>Payment-Provider-Package.Infrastructure</Title>
+        <Authors>Infrastructure Team</Authors>
+        <Description>A nuget package that allows one connect to checkout.com payment service</Description>
+        <PackageProjectUrl>https://github.com/AskXclaim/PaymentProviderPackage</PackageProjectUrl>
+        <PackageIcon>PaymentProviderPackage.png</PackageIcon>
+        <RepositoryType>Git</RepositoryType>
+        <RepositoryUrl>https://github.com/AskXclaim/PaymentProviderPackage</RepositoryUrl>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="CheckoutSDK" Version="4.17.0" />
+      <PackageReference Include="Tenekon.MSBuild.Packaging.ProjectBuildInPackage" Version="2.0.0">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Application\Application\Application.csproj" />
+      <ProjectReference Include="..\..\Application\Application\Application.csproj" PrivateAssets="all" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="PaymentProviderPackage.png">
+        <Pack>True</Pack>
+        <PackagePath></PackagePath>
+      </None>
+    </ItemGroup>
+<!--    <a href="https://www.flaticon.com/free-icons/google-wallet" title="google wallet icons">Google wallet icons created by Freepik - Flaticon</a>-->
 </Project>
