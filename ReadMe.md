@@ -102,4 +102,6 @@ do a nuget restore etc.
 
 ### Usage Two: Get a nuget package of the Infrastructure project
 Generate a nuget package using instructions from [this](https://learn.microsoft.com/en-us/nuget/quickstart/create-and-publish-a-package-using-the-dotnet-cli) or [this](https://www.jetbrains.com/help/rider/Creating_NuGet_packages.html) tutorial and consume where needed.
+
+NB: you may need to clear nuget cache in the project you intend to use the generated nuget package for it to work [correctly]. Please follow [this tutorial](https://learn.microsoft.com/en-us/nuget/consume-packages/managing-the-global-packages-and-cache-folders#clearing-local-folders) to do that.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
