@@ -20,8 +20,16 @@
     <li>
       <a href="#usage">Usage</a>
       <ul>
-         <li><a href="#usage-one">Usage One: Running swagger/Scalar UI</a></li>
-         <li><a href="#usage-two">Usage Two: Get a nuget package of the Infrastructure project</a></li>
+         <li>
+            <a href="#usage-one-running-swaggerscalar-ui">
+               Usage One: Running swagger/Scalar UI
+            </a>
+         </li>
+         <li>
+            <a href="#usage-two-get-a-nuget-package-of-the-infrastructure-project">
+               Usage Two: Get a nuget package of the Infrastructure project
+            </a>
+         </li>
       </ul>
    </li>
 <ol>
@@ -93,5 +101,5 @@ Delete all the `obj` & `bin` folders in all the projects and do a nuget restore 
 do a nuget restore etc.
 
 ### Usage Two: Get a nuget package of the Infrastructure project
-
+Generate a nuget package using instructions from [this](https://learn.microsoft.com/en-us/nuget/quickstart/create-and-publish-a-package-using-the-dotnet-cli) or [this](https://www.jetbrains.com/help/rider/Creating_NuGet_packages.html) tutorial and consume where needed.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
