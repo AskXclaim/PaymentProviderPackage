@@ -4,6 +4,6 @@ namespace Application.Enums
 {
     public enum AllowedCountry
     {
-        [EnumMember(Value = "GB")]GB
+        [EnumMember(Value = "GB")]GB =1
     }
 }

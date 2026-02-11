@@ -4,7 +4,7 @@ using Application.Models;
 
 namespace Application.Dtos
 {
-    public class GeneratePaymentSessionRequest : IGeneratePaymentSessionRequest
+    public class GenerateRawPaymentSessionRequest:IGeneratePaymentSessionRequest
     {
         public string ProcessingChannelId { get; }
         public Models.Money Money  { get; }
@@ -33,7 +33,7 @@ namespace Application.Dtos
                 PaymentMethod.Card
             };
 
-        public GeneratePaymentSessionRequest(
+        public GenerateRawPaymentSessionRequest(
             string processingChannelId,
             BillingDetails billingDetails,
             Models.Money money,

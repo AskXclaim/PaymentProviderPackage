@@ -1,18 +1,24 @@
+using System.Collections.Generic;
+using System.Linq;
 using Application.Dtos;
+using Application.Enums;
 using Checkout.Common;
 using Checkout.Payments;
 using Checkout.Payments.Request;
 using Checkout.Payments.Sessions;
 using Infrastructure.Services.Validators;
+using Currency = Checkout.Common.Currency;
+using Link = Application.Dtos.Link;
+using PaymentType = Checkout.Payments.PaymentType;
 
 namespace Infrastructure.Services.Builders
 {
-    public class PaymentSessionBuilder
+    public static class PaymentSessionBuilder
     {
         private const string CountryCode = "44";
 
-        public PaymentSessionsRequest GetPaymentSessionsRequest
-            (GeneratePaymentSessionRequest request)
+        public static PaymentSessionsRequest GetPaymentSessionsRequest
+            (IGeneratePaymentSessionRequest request)
         {
             return new PaymentSessionsRequest
             {
@@ -46,6 +52,8 @@ namespace Infrastructure.Services.Builders
                         StorePaymentDetails = StorePaymentDetailsType.Enabled
                     }
                 },
+                EnabledPaymentMethods = GetPaymentMethodsType(request.EnabledPaymentMethods),
+
                 Customer = new PaymentCustomerRequest()
                 {
                     Name = $"{request.Customer.FirstName} {request.Customer.LastName}",
@@ -58,7 +66,15 @@ namespace Infrastructure.Services.Builders
             };
         }
 
-        public GeneratedPaymentSessionResponse GetGeneratedPaymentSessionResponse(
+        private static IList<PaymentMethodsType> GetPaymentMethodsType(IEnumerable<PaymentMethod> paymentMethodsTypes)
+        {
+            var checkoutPaymentMethodsTypes =
+                paymentMethodsTypes.Select(paymentMethodsType =>
+                    GlobalMethods.ParseEnum<PaymentMethodsType>(paymentMethodsType.ToString())).ToList();
+            return checkoutPaymentMethodsTypes;
+        }
+
+        public static GeneratedPaymentSessionResponse GetGeneratedPaymentSessionResponse(
             PaymentSessionsResponse paymentResponse)
         {
             return new GeneratedPaymentSessionResponse
@@ -66,6 +82,30 @@ namespace Infrastructure.Services.Builders
                 paymentResponse.Id, paymentResponse.PaymentSessionSecret,
                 paymentResponse.PaymentSessionToken, paymentResponse.GetSelfLink().Href
             );
+        }
+
+        public static GeneratedPaymentSessionRawResponse GetGeneratedRawPaymentSessionResponse(
+            PaymentSessionsResponse paymentResponse)
+        {
+            var response = new GeneratedPaymentSessionRawResponse()
+            {
+                PaymentSession = new PaymentSession
+                {
+                    Id = paymentResponse.Id,
+                    PaymentSessionSecret = paymentResponse.PaymentSessionSecret,
+                    PaymentSessionToken = paymentResponse.PaymentSessionToken,
+                    Links = new Dictionary<string, Link>()
+                }
+            };
+            foreach (var link in paymentResponse.Links)
+            {
+                response.PaymentSession.Links.Add(link.Key, new Link()
+                {
+                    Href = link.Value.Href, Title = link.Value.Title
+                });
+            }
+
+            return response;
         }
     }
 }

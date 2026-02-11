@@ -28,6 +28,9 @@ namespace Infrastructure.Services.Factories
                     case nameof(GeneratePaymentSessionRequest):
                         var generatePaymentSession = new GeneratePaymentSession(_apiBuilder);
                         return await generatePaymentSession.GetResult((GeneratePaymentSessionRequest)request);
+                    case nameof(GenerateRawPaymentSessionRequest):
+                        var aGeneratePaymentSession = new GeneratePaymentSession(_apiBuilder);
+                        return await aGeneratePaymentSession.GetResult((GenerateRawPaymentSessionRequest)request);
                     case nameof(PaymentSessionDetailRequest):
                         var getPaymentSessionDetails = new GetPaymentSessionDetails(_apiBuilder);
                         return await getPaymentSessionDetails.GetResult(((PaymentSessionDetailRequest)request)

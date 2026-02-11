@@ -16,6 +16,12 @@ public static class PaymentEndpoints
                     var response = await paymentGateway.GeneratePaymentSession(request);
                     return response != null ? new Response(response, HttpStatusCode.OK) : GetFailedResponse();
             });
+        groupBuilder.MapPost("/GenerateRawPaymentSession",
+            async (IPaymentGateway paymentGateway, [FromBody] GenerateRawPaymentSessionRequest request) =>
+            {
+                var response = await paymentGateway.GenerateRawPaymentSession(request);
+                return response != null ? new Response(response, HttpStatusCode.OK) : GetFailedResponse();
+            });
 
         groupBuilder.MapGet("/GetPaymentSessionDetails",
             async (IPaymentGateway paymentGateway, string paymentSessionId) =>

@@ -20,6 +20,9 @@ namespace Infrastructure.Services
         public async Task<GeneratedPaymentSessionResponse> GeneratePaymentSession(GeneratePaymentSessionRequest request) =>
             await _paymentFactory.GetResult(request) as GeneratedPaymentSessionResponse;
 
+        public async Task<GeneratedPaymentSessionRawResponse> GenerateRawPaymentSession(GenerateRawPaymentSessionRequest request) =>
+            await _paymentFactory.GetResult(request) as GeneratedPaymentSessionRawResponse ;
+        
         public async Task<PaymentSessionDetailResponse> GetPaymentSessionDetails(PaymentSessionDetailRequest request) =>
             await _paymentFactory.GetResult(request) as PaymentSessionDetailResponse;
     }
