@@ -13,13 +13,15 @@ public class TokenizeCard : PageModel
 {
     private readonly IPaymentGateway _paymentGateway;
     private readonly IConfiguration _config;
+    private readonly LinkGenerator _linkGenerator;
 
     public string? PaymentProviderId { get; set; }
 
-    public TokenizeCard(IPaymentGateway paymentGateway, IConfiguration config)
+    public TokenizeCard(IPaymentGateway paymentGateway, IConfiguration config, LinkGenerator linkGenerator)
     {
         _paymentGateway = paymentGateway;
         _config = config;
+        _linkGenerator = linkGenerator;
     }
 
     [NonAction]
@@ -34,8 +36,8 @@ public class TokenizeCard : PageModel
                         cardRegistration.Address.City, cardRegistration.Address.County, AllowedCountry.GB,
                         cardRegistration.Address.Postcode), cardRegistration.PhoneNumber),
                 new Application.Models.Money(0, Currency.GBP),
-                "http://localhost:5009/successUrl.co.uk",
-                "http://localhost:5009/successUrl.co.uk", GetReference(cardRegistration), new BillingDescriptor()
+                GetUriByPage("TokenizedSuccessfully"),
+                GetUriByPage("TokenizationFailed"), GetReference(cardRegistration), new BillingDescriptor()
                 {
                     City = cardRegistration.Address.City,
                     Name = $"{cardRegistration.FirstName} {cardRegistration.LastName}",
@@ -53,6 +55,11 @@ public class TokenizeCard : PageModel
             }
         }
     }
+
+    private string? GetUriByPage(string pageName) =>
+        _linkGenerator.GetUriByPage(HttpContext, $"/{pageName}");
+
+
     //Remember reference has to be less than or equal to 50 character
     private string GetReference(CardRegistration cardRegistration) =>
         $"Tokenize-{cardRegistration.FirstName}-{cardRegistration.LastName}";
