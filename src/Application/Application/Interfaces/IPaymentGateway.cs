@@ -5,8 +5,8 @@ namespace Application.Interfaces
 {
     public interface IPaymentGateway
     {
-        Task<GeneratedPaymentSessionResponse> GeneratePaymentSession(GeneratePaymentSessionRequest  request);
-        Task<GeneratedPaymentSessionRawResponse> GenerateRawPaymentSession(GenerateRawPaymentSessionRequest  request);
-        Task<PaymentSessionDetailResponse> GetPaymentSessionDetails(PaymentSessionDetailRequest request);
+        Task<GeneratedPaymentSessionResponseDto> GeneratePaymentSession(GeneratePaymentSessionRequestDto  requestDto);
+        Task<GeneratedPaymentSessionRawResponseDto> GenerateRawPaymentSession(GenerateRawPaymentSessionRequestDto  requestDto);
+        Task<PaymentSessionDetailResponseDto> GetPaymentSessionDetails(PaymentSessionDetailRequestDto requestDto);
     }
 }

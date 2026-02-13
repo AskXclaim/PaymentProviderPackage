@@ -30,19 +30,19 @@ public class TokenizeCard : PageModel
         var cardRegistration = TempData.Get<CardRegistration>("cardRegistration");
         if (cardRegistration != null)
         {
-            var request = new GenerateRawPaymentSessionRequest(_config["processingChannelId"],
+            var request = new GenerateRawPaymentSessionRequestDto(_config["processingChannelId"],
                 new BillingDetails(
                     new Address(cardRegistration.Address.AddressLineOne, cardRegistration.Address.AddressLineTwo,
                         cardRegistration.Address.City, cardRegistration.Address.County, AllowedCountry.GB,
                         cardRegistration.Address.Postcode), cardRegistration.PhoneNumber),
                 new Application.Models.Money(0, Currency.GBP),
                 GetUriByPage("TokenizedSuccessfully"),
-                GetUriByPage("TokenizationFailed"), GetReference(cardRegistration), new BillingDescriptor()
+                GetUriByPage("TokenizationFailed"), GetReference(cardRegistration), new BillingDescriptor
                 {
                     City = cardRegistration.Address.City,
                     Name = $"{cardRegistration.FirstName} {cardRegistration.LastName}",
                     Reference = $"some-reference-{cardRegistration.FirstName}-{cardRegistration.LastName}",
-                }, new Customer()
+                }, new Customer
                 {
                     Email = cardRegistration.Email, FirstName = cardRegistration.FirstName,
                     LastName = cardRegistration.LastName, Id = "1"

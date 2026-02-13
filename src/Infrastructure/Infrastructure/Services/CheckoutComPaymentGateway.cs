@@ -17,13 +17,13 @@ namespace Infrastructure.Services
             _paymentFactory = new CheckoutPaymentMethodFactory(apiBuild);
         }
 
-        public async Task<GeneratedPaymentSessionResponse> GeneratePaymentSession(GeneratePaymentSessionRequest request) =>
-            await _paymentFactory.GetResult(request) as GeneratedPaymentSessionResponse;
+        public async Task<GeneratedPaymentSessionResponseDto> GeneratePaymentSession(GeneratePaymentSessionRequestDto requestDto) =>
+            await _paymentFactory.GetResult(requestDto) as GeneratedPaymentSessionResponseDto;
 
-        public async Task<GeneratedPaymentSessionRawResponse> GenerateRawPaymentSession(GenerateRawPaymentSessionRequest request) =>
-            await _paymentFactory.GetResult(request) as GeneratedPaymentSessionRawResponse ;
+        public async Task<GeneratedPaymentSessionRawResponseDto> GenerateRawPaymentSession(GenerateRawPaymentSessionRequestDto requestDto) =>
+            await _paymentFactory.GetResult(requestDto) as GeneratedPaymentSessionRawResponseDto ;
         
-        public async Task<PaymentSessionDetailResponse> GetPaymentSessionDetails(PaymentSessionDetailRequest request) =>
-            await _paymentFactory.GetResult(request) as PaymentSessionDetailResponse;
+        public async Task<PaymentSessionDetailResponseDto> GetPaymentSessionDetails(PaymentSessionDetailRequestDto requestDto) =>
+            await _paymentFactory.GetResult(requestDto) as PaymentSessionDetailResponseDto;
     }
 }

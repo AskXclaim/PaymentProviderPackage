@@ -40,21 +40,20 @@ namespace Infrastructure.Services.Builders
                         Number = request.BillingDetails.Phone
                     }
                 },
-                ThreeDs = new ThreeDsRequest()
+                ThreeDs = new ThreeDsRequest
                 {
                     Enabled = true,
                     ChallengeIndicator = ChallengeIndicatorType.ChallengeRequestedMandate
                 },
-                PaymentMethodConfiguration = new PaymentMethodConfiguration()
+                PaymentMethodConfiguration = new PaymentMethodConfiguration
                 {
-                    Card = new Card()
+                    Card = new Card
                     {
                         StorePaymentDetails = StorePaymentDetailsType.Enabled
                     }
                 },
                 EnabledPaymentMethods = GetPaymentMethodsType(request.EnabledPaymentMethods),
-
-                Customer = new PaymentCustomerRequest()
+                Customer = new PaymentCustomerRequest
                 {
                     Name = $"{request.Customer.FirstName} {request.Customer.LastName}",
                     Email = request.Customer.Email
@@ -74,20 +73,20 @@ namespace Infrastructure.Services.Builders
             return checkoutPaymentMethodsTypes;
         }
 
-        public static GeneratedPaymentSessionResponse GetGeneratedPaymentSessionResponse(
+        public static GeneratedPaymentSessionResponseDto GetGeneratedPaymentSessionResponse(
             PaymentSessionsResponse paymentResponse)
         {
-            return new GeneratedPaymentSessionResponse
+            return new GeneratedPaymentSessionResponseDto
             (
                 paymentResponse.Id, paymentResponse.PaymentSessionSecret,
                 paymentResponse.PaymentSessionToken, paymentResponse.GetSelfLink().Href
             );
         }
 
-        public static GeneratedPaymentSessionRawResponse GetGeneratedRawPaymentSessionResponse(
+        public static GeneratedPaymentSessionRawResponseDto GetGeneratedRawPaymentSessionResponse(
             PaymentSessionsResponse paymentResponse)
         {
-            var response = new GeneratedPaymentSessionRawResponse()
+            var response = new GeneratedPaymentSessionRawResponseDto
             {
                 PaymentSession = new PaymentSession
                 {
@@ -99,7 +98,7 @@ namespace Infrastructure.Services.Builders
             };
             foreach (var link in paymentResponse.Links)
             {
-                response.PaymentSession.Links.Add(link.Key, new Link()
+                response.PaymentSession.Links.Add(link.Key, new Link
                 {
                     Href = link.Value.Href, Title = link.Value.Title
                 });

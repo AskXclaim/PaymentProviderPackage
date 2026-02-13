@@ -1,17 +1,17 @@
 namespace Application.Dtos
 {
-    public class GeneratedPaymentSessionResponse
+    public class GeneratedPaymentSessionResponseDto
     {
         public string Id { get; }
         public string Token { get; }
         public string Secret { get; }
         public string Href { get; }
 
-        public GeneratedPaymentSessionResponse()
+        public GeneratedPaymentSessionResponseDto()
         {
         }   
 
-        public GeneratedPaymentSessionResponse(string id, string token, string secret, string href)
+        public GeneratedPaymentSessionResponseDto(string id, string token, string secret, string href)
         {
             Id = id;
             Token = token;

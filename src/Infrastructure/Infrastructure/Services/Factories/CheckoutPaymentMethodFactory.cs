@@ -25,15 +25,15 @@ namespace Infrastructure.Services.Factories
             {
                 switch (request.GetType().Name)
                 {
-                    case nameof(GeneratePaymentSessionRequest):
+                    case nameof(GeneratePaymentSessionRequestDto):
                         var generatePaymentSession = new GeneratePaymentSession(_apiBuilder);
-                        return await generatePaymentSession.GetResult((GeneratePaymentSessionRequest)request);
-                    case nameof(GenerateRawPaymentSessionRequest):
+                        return await generatePaymentSession.GetResult((GeneratePaymentSessionRequestDto)request);
+                    case nameof(GenerateRawPaymentSessionRequestDto):
                         var aGeneratePaymentSession = new GeneratePaymentSession(_apiBuilder);
-                        return await aGeneratePaymentSession.GetResult((GenerateRawPaymentSessionRequest)request);
-                    case nameof(PaymentSessionDetailRequest):
+                        return await aGeneratePaymentSession.GetResult((GenerateRawPaymentSessionRequestDto)request);
+                    case nameof(PaymentSessionDetailRequestDto):
                         var getPaymentSessionDetails = new GetPaymentSessionDetails(_apiBuilder);
-                        return await getPaymentSessionDetails.GetResult(((PaymentSessionDetailRequest)request)
+                        return await getPaymentSessionDetails.GetResult(((PaymentSessionDetailRequestDto)request)
                             .PaymentSessionId);
                     default:
                         throw new PaymentProviderException($"Unknown request type {request.GetType().Name}",

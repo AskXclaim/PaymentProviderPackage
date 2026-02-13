@@ -3,13 +3,11 @@ using System.Threading.Tasks;
 using Application.Dtos;
 using Application.Enums;
 using Application.Exceptions;
-using Application.Models;
 using Checkout;
-using Checkout.Common;
 using Checkout.Payments.Response;
+using Checkout.Payments.Response.Source;
 using Infrastructure.Services.Validators;
 using Currency = Checkout.Common.Currency;
-using Money = Application.Dtos.Money;
 
 namespace Infrastructure.Services.Factories.FactoryItems
 {
@@ -22,7 +20,7 @@ namespace Infrastructure.Services.Factories.FactoryItems
             _apiBuild = apiBuild;
         }
 
-        public async Task<PaymentSessionDetailResponse> GetResult(string paymentSessionId)
+        public async Task<PaymentSessionDetailResponseDto> GetResult(string paymentSessionId)
         {
             if (!PaymentSessionValidator.IsPaymentSessionIdValid(paymentSessionId))
                 throw new PaymentProviderException
@@ -37,21 +35,21 @@ namespace Infrastructure.Services.Factories.FactoryItems
             return ParseResponse(result);
         }
 
-        private PaymentSessionDetailResponse ParseResponse(GetPaymentResponse result)
+        private PaymentSessionDetailResponseDto ParseResponse(GetPaymentResponse result)
         {
-            return new PaymentSessionDetailResponse()
-            {
-                Id = result.Id, RequestedOn = result.RequestedOn,
-                Reference = result.Reference,
-                Amount = ParseMoney(result.Amount, result.Currency),
-                Status = ParsePaymentStatus(result.Status),
-                IsApproved = result.Approved,
-                PaymentType = ParsePaymentType(result.PaymentType),
-                Customer = ParseCustomer(result.Customer)
-            };
+            var source = result.Source as CardResponseSource;
+            if (source is null)
+                throw new PaymentProviderException("Invalid card response", HttpStatusCode.InternalServerError);
+
+            return new PaymentSessionDetailResponseDto(result.Id, result.RequestedOn,
+                ParsePaymentSessionDetailSource(source),
+                ParsePaymentType(result.PaymentType), ParseMoney(result.Amount, result.Currency),
+                result.Reference,
+                result.Description, result.Approved, ParsePaymentStatus(result.Status),
+                ParseCustomer(result));
         }
 
-        private Money ParseMoney(long? amount, Currency? currency)
+        private MoneyDto ParseMoney(long? amount, Currency? currency)
         {
             var anAmount = amount ?? 0;
             var aCurrency = Application.Enums.Currency.GBP;
@@ -60,7 +58,7 @@ namespace Infrastructure.Services.Factories.FactoryItems
             if (currency.HasValue)
                 aCurrency = GlobalMethods.ParseEnum<Application.Enums.Currency>(currency.Value.ToString());
 
-            return new Money(anAmount, aCurrency.ToString());
+            return new MoneyDto(anAmount, aCurrency.ToString());
         }
 
         private string ParsePaymentStatus(Checkout.Payments.PaymentStatus? status)
@@ -74,13 +72,11 @@ namespace Infrastructure.Services.Factories.FactoryItems
                 ? null
                 : GlobalMethods.ParseEnum<PaymentType>(paymentType.Value.ToString()).ToString();
 
-        private Customer ParseCustomer(CustomerResponse customer) =>
-            new Customer
-            {
-                Id = customer.Id,
-                FirstName = customer.Name,
-                LastName = customer.Name,
-                Email = customer.Email
-            };
+        private PaymentSessionCustomerDto ParseCustomer(GetPaymentResponse result) =>
+            new PaymentSessionCustomerDto(result.Customer.Id, result.Customer.Email, result.Customer.Name);
+
+        private PaymentSessionDetailSourceDto ParsePaymentSessionDetailSource(CardResponseSource source) =>
+            new PaymentSessionDetailSourceDto(source.Id, source.ExpiryMonth, source.ExpiryYear, source.Name,
+                source.Last4);
     }
 }

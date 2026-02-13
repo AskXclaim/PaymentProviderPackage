@@ -1,10 +1,10 @@
 namespace Application.Dtos
 {
-    public class PaymentSessionDetailRequest
+    public class PaymentSessionDetailRequestDto
     {
         public string PaymentSessionId { get;}
 
-        public PaymentSessionDetailRequest(string paymentSessionId)
+        public PaymentSessionDetailRequestDto(string paymentSessionId)
         {
             PaymentSessionId = paymentSessionId;
         }

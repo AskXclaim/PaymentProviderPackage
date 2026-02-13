@@ -18,9 +18,9 @@ namespace Infrastructure.Services.Factories.FactoryItems
             _apiBuild = apiBuild;
         }
 
-        public async Task<GeneratedPaymentSessionResponse> GetResult(GeneratePaymentSessionRequest request)
+        public async Task<GeneratedPaymentSessionResponseDto> GetResult(GeneratePaymentSessionRequestDto requestDto)
         {
-            var paymentResponse = await GetPaymentSession(request);
+            var paymentResponse = await GetPaymentSession(requestDto);
             return paymentResponse != null
                 ? PaymentSessionBuilder.GetGeneratedPaymentSessionResponse(paymentResponse)
                 : null;
@@ -38,9 +38,9 @@ namespace Infrastructure.Services.Factories.FactoryItems
             return paymentResponse;
         }
 
-        public async Task<GeneratedPaymentSessionRawResponse> GetResult(GenerateRawPaymentSessionRequest request)
+        public async Task<GeneratedPaymentSessionRawResponseDto> GetResult(GenerateRawPaymentSessionRequestDto requestDto)
         {
-             var paymentResponse = await GetPaymentSession(request);
+             var paymentResponse = await GetPaymentSession(requestDto);
              return paymentResponse != null
                  ? PaymentSessionBuilder.GetGeneratedRawPaymentSessionResponse(paymentResponse)
                  : null;

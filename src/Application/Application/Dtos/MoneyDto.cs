@@ -1,11 +1,11 @@
 ﻿namespace Application.Dtos
 {
-    public class Money
+    public class MoneyDto
     {
         public decimal Amount { get; }
         public string Currency { get; }
 
-        public Money(decimal amount, string currency)
+        public MoneyDto(decimal amount, string currency)
         {
             Amount = amount;
             Currency = currency;

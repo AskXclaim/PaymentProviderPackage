@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Application.Dtos
 {
-    public class GeneratedPaymentSessionRawResponse
+    public class GeneratedPaymentSessionRawResponseDto
     {
         public PaymentSession PaymentSession { get; set; }
     }

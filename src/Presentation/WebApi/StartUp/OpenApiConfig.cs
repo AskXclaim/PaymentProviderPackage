@@ -13,8 +13,12 @@ public static class OpenApiConfig
         const string apiName = "Payment-Package-WebApi";
         if (!app.Environment.IsDevelopment()) return;
         app.MapOpenApi();
-        NSwagApplicationBuilderExtensions.UseOpenApi(app);
-        app.UseSwaggerUi(options => { options.DocumentTitle = apiName; });
+        app.UseSwagger();
+        app.UseSwaggerUI(options =>
+        {
+            options.DocumentTitle = apiName;
+            options.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1");
+        });
         app.MapScalarApiReference(options =>
         {
             options.Title = apiName;
