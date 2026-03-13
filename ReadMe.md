@@ -101,10 +101,9 @@
 ### Usage One: Running swagger/Scalar UI
 
 Set start up project to the 'Web Api' project, and run. You should get a Scalar UI or Swagger UI Page depending on what
-configuration setting you set it to run on.
-
+configuration setting you set it to run on.<br>
 If you get an error similar to this
-`Error NETSDK1005 : Assets file 'project.assets.json' doesn't have a target for '.NETStandard,Version=v2.0'. Ensure that restore has run and that you have included '.NETStandard,Version=v2.0' in the TargetFrameworks for your project.`
+`Error NETSDK1005 : Assets file 'project.assets.json' doesn't have a target for '.NETStandard,Version=v2.0'.`<br>`Ensure that restore has run and that you have included '.NETStandard,Version=v2.0' in the TargetFrameworks for your project.`<br>
 Delete all the `obj` & `bin` folders in all the projects and do a nuget restore or a nuget forced restore.
 
 [This articule](https://learn.microsoft.com/en-us/nuget/consume-packages/package-restore) provides information on how to
@@ -127,10 +126,10 @@ to do that.
 ## Nbs
 
 ### Creating NuGet Packages
-The Tenekon.MSBuild NuGet package in the 'Infrastructure' project allows the addition of refrenced projects' dlls into a NuGet package.
+The Tenekon.MSBuild NuGet package in the 'Infrastructure' project allows the addition of refrenced projects' dlls into a NuGet package.<br>
 In this case, it allows the addition of the Application projects dll aka application.dll
 
-As part of this working correctly, you need the line referencing the 'Application' project in Infrastructure.csproj to include 'PrivateAssets="all"'
+As part of this working correctly, you need the line referencing the 'Application' project in Infrastructure.csproj to include `PrivateAssets="all"`
 aka 
 ```csharp
 <ProjectReference Include="..\Application\Application.csproj" PrivateAssets="all"/>
@@ -145,7 +144,7 @@ dotnet pack --configuration Debug
 ```
 
 It has been noticed that using the below commnand generates the most expected outcome for the behaviour of the the generated
-NuGet package. Nb: the generated package is located in '~\CommonPaymentProvider\src\Infrastructure\bin\release\'
+NuGet package.<br> Nb: the generated package is located in '~\CommonPaymentProvider\src\Infrastructure\bin\release\'
 
 ```csharp
 dotnet pack
