@@ -30,12 +30,12 @@ public class TokenizeCard : PageModel
         var cardRegistration = TempData.Get<CardRegistration>("cardRegistration");
         if (cardRegistration != null)
         {
-            var request = new GenerateRawPaymentSessionRequestDto(_config["processingChannelId"],
+            var request = new GeneratePaymentSessionRequestDto(_config["processingChannelId"],
                 new BillingDetails(
                     new Address(cardRegistration.Address.AddressLineOne, cardRegistration.Address.AddressLineTwo,
                         cardRegistration.Address.City, cardRegistration.Address.County, AllowedCountry.GB,
                         cardRegistration.Address.Postcode), cardRegistration.PhoneNumber),
-                new Money(0, Currency.GBP),
+                0, Currency.GBP,
                 GetUriByPage("TokenizedSuccessfully"),
                 GetUriByPage("TokenizationFailed"), GetReference(cardRegistration), new BillingDescriptor
                 {
@@ -47,7 +47,7 @@ public class TokenizeCard : PageModel
                     Email = cardRegistration.Email, FirstName = cardRegistration.FirstName,
                     LastName = cardRegistration.LastName, Id = "1"
                 }, "displayName");
-            var response = await _paymentGateway.GenerateRawPaymentSession(request).ConfigureAwait(false);
+            var response = await _paymentGateway.GeneratePaymentSession(request).ConfigureAwait(false);
             if (response != null)
             {
                 TempData.Set("paymentSession", response.PaymentSession);

@@ -2,6 +2,8 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+// import "https://checkout-web-components.checkout.com/index.js"
+// 
 const mountFlow = async (publicKey,paymentSession) => {
         console.log("Checkout Web Page");
         const checkout = await CheckoutWebComponents({
