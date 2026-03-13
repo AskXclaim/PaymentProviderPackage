@@ -1,15 +1,14 @@
 using Application.Interfaces;
 using Infrastructure.Services;
 
-const string allowCheckoutOrigins = "AllowCheckoutOrigins";
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddScoped<IPaymentGateway>(pg =>
+builder.Services.AddScoped<IPaymentGateway>(_ =>
     new CheckoutComPaymentGateway(builder.Configuration.GetSection("secretKey").Value));
-var app = builder.Build();
 
+var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

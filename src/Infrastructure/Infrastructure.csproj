@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageId>CommonPaymentProvider</PackageId>
+        <Title>CommonPaymentProvider</Title>
+        <Authors>Lbg</Authors>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="CheckoutSDK" Version="4.17.0" />
+      <PackageReference Include="Tenekon.MSBuild.Packaging.ProjectBuildInPackage" Version="2.0.0">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Application\Application.csproj" PrivateAssets="all"/>
+    </ItemGroup>
+
+</Project>

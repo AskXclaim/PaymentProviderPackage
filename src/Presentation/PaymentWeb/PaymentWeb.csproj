@@ -4,16 +4,12 @@
         <TargetFramework>net10.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <UserSecretsId>369f77a6-e011-4931-af12-b8b67d45c26e</UserSecretsId>
+        <UserSecretsId>0c264cd6-7eb0-4113-a9fe-0529f6c25d32</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Application\Application\Application.csproj" />
-      <ProjectReference Include="..\..\Infrastructure\Infrastructure\Infrastructure.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <PackageReference Include="Payment-Provider-Package.Infrastructure" Version="1.0.0" />
+      <PackageReference Include="CommonPaymentProvider" Version="1.0.0" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     </ItemGroup>
 
 </Project>

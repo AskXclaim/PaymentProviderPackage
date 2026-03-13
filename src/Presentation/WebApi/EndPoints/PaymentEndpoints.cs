@@ -9,17 +9,11 @@ namespace WebApi.EndPoints;
 public static class PaymentEndpoints
 {
     public static RouteGroupBuilder MapPaymentEndpoints(this RouteGroupBuilder groupBuilder)
-    {
+    {      
         groupBuilder.MapPost("/GeneratePaymentSession",
             async (IPaymentGateway paymentGateway, [FromBody] GeneratePaymentSessionRequestDto requestDto) =>
             {
-                    var response = await paymentGateway.GeneratePaymentSession(requestDto);
-                    return response != null ? new Response(response, HttpStatusCode.OK) : GetFailedResponse();
-            });
-        groupBuilder.MapPost("/GenerateRawPaymentSession",
-            async (IPaymentGateway paymentGateway, [FromBody] GenerateRawPaymentSessionRequestDto requestDto) =>
-            {
-                var response = await paymentGateway.GenerateRawPaymentSession(requestDto);
+                var response = await paymentGateway.GeneratePaymentSession(requestDto);
                 return response != null ? new Response(response, HttpStatusCode.OK) : GetFailedResponse();
             });
 

@@ -4,30 +4,20 @@
         <TargetFramework>net10.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <UserSecretsId>01c5dae4-c484-4dc2-bf8a-2400ae8f0043</UserSecretsId>
+        <UserSecretsId>80524366-d784-491f-a5c8-96bc1187f3f5</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Asp.Versioning.Http" Version="8.1.1" />
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.2"/>
-        <PackageReference Include="Microsoft.Extensions.ApiDescription.Server" Version="10.0.2">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
-        <PackageReference Include="Scalar.AspNetCore" Version="2.12.32" />
-        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="10.1.2" />
-        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="10.1.2" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.3"/>
+        <PackageReference Include="Scalar.AspNetCore" Version="2.12.52" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.4" />
+        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="10.1.4" />
+        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="10.1.4" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Application\Application\Application.csproj" />
-      <ProjectReference Include="..\..\Infrastructure\Infrastructure\Infrastructure.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Reference Include="Infrastructure">
-        <HintPath>..\..\Infrastructure\Infrastructure\bin\Debug\netstandard2.0\Infrastructure.dll</HintPath>
-      </Reference>
+      <ProjectReference Include="..\..\Application\Application.csproj" />
+      <ProjectReference Include="..\..\Infrastructure\Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

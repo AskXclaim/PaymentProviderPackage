@@ -32,6 +32,16 @@
          </li>
       </ul>
    </li>
+ <li>
+      <a href="#nbs">Nbs</a>
+      <ul>
+         <li>
+            <a href="#creating-nuget-packages">
+               Creating NuGet Packages
+            </a>
+         </li>
+      </ul>
+   </li>
 <ol>
 </details>
 
@@ -101,7 +111,51 @@ Delete all the `obj` & `bin` folders in all the projects and do a nuget restore 
 do a nuget restore etc.
 
 ### Usage Two: Get a nuget package of the Infrastructure project
-Generate a nuget package using instructions from [this](https://learn.microsoft.com/en-us/nuget/quickstart/create-and-publish-a-package-using-the-dotnet-cli) or [this](https://www.jetbrains.com/help/rider/Creating_NuGet_packages.html) tutorial and consume where needed.
 
-NB: you may need to clear nuget cache in the project you intend to use the generated nuget package for it to work [correctly]. Please follow [this tutorial](https://learn.microsoft.com/en-us/nuget/consume-packages/managing-the-global-packages-and-cache-folders#clearing-local-folders) to do that.
+Generate a nuget package using instructions
+from [this](https://learn.microsoft.com/en-us/nuget/quickstart/create-and-publish-a-package-using-the-dotnet-cli)
+or [this](https://www.jetbrains.com/help/rider/Creating_NuGet_packages.html) tutorial and consume where needed.
+
+NB: you may need to clear nuget cache in the project you intend to use the generated nuget package for it to
+work [correctly]. Please
+follow [this tutorial](https://learn.microsoft.com/en-us/nuget/consume-packages/managing-the-global-packages-and-cache-folders#clearing-local-folders)
+to do that.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- USAGE EXAMPLES -->
+
+## Nbs
+
+### Creating NuGet Packages
+The Tenekon.MSBuild NuGet package in the 'Infrastructure' project allows the addition of refrenced projects' dlls into a NuGet package.
+In this case, it allows the addition of the Application projects dll aka application.dll
+
+As part of this working correctly, you need the line referencing the 'Application' project in Infrastructure.csproj to include 'PrivateAssets="all"'
+aka 
+```csharp
+<ProjectReference Include="..\Application\Application.csproj" PrivateAssets="all"/>
+```
+Then pack the project using 
+```csharp
+dotnet pack
+```
+or
+```csharp
+dotnet pack --configuration Debug
+```
+
+It has been noticed that using the below commnand generates the most expected outcome for the behaviour of the the generated
+NuGet package. Nb: the generated package is located in '~\CommonPaymentProvider\src\Infrastructure\bin\release\'
+
+```csharp
+dotnet pack
+```
+To get it to use debug please use the command below
+```csharp
+dotnet pack --configuration Debug
+```
+or 
+```csharp
+dotnet pack -c Debug
+```
+note, that now the NuGet package created will be located in '~\CommonPaymentProvider\src\Infrastructure\bin\debug\'
